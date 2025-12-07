@@ -1,0 +1,14 @@
+namespace: extreme_community
+name: xiqse
+version: 1.0.0
+readme: README.md
+authors:
+  - Markus Nikulski <mnikulski@extremenetworks.com>
+  - Thibault Chevalleraud <tchevalleraud@extremenetworks.com>
+description: >
+  This collection provides Ansible modules and roles to manage ExtremeCloudIQ - Site Engine via GraphQL by Extreme Community.
+license: MIT
+tags:
+  - networking
+dependencies: {}
+repository: https://github.com/extremenetworks/ansible_collections.extreme_community.xiqse
