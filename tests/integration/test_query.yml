@@ -1,0 +1,37 @@
+---
+- name: XIQ-SE GraphQL smoke test
+  hosts: localhost
+  gather_facts: false
+  vars:
+    xiqse_host: "{{ lookup('env', 'XIQSE_HOST') | default('', true) }}"
+    xiqse_client: "{{ lookup('env', 'XIQSE_CLIENT_ID') | default('', true) }}"
+    xiqse_secret: "{{ lookup('env', 'XIQSE_CLIENT_SECRET') | default('', true) }}"
+
+  tasks:
+    - name: Skip when environment is not provided
+      ansible.builtin.debug:
+        msg: "Skipping: environment variables not set"
+      when: xiqse_host == '' or xiqse_client == '' or xiqse_secret == ''
+
+    - name: Query server info
+      extreme_community.xiqse.xiqse_query:
+        query: |
+          query {
+            administration {
+              serverInfo {
+                version
+              }
+            }
+          }
+        provider:
+          host: "{{ xiqse_host }}"
+          client_id: "{{ xiqse_client }}"
+          client_secret: "{{ xiqse_secret }}"
+      register: result
+      when: xiqse_host != '' and xiqse_client != '' and xiqse_secret != ''
+
+    - name: Assert version is present
+      ansible.builtin.assert:
+        that:
+          - result.result.data.administration.serverInfo.version is string
+      when: xiqse_host != '' and xiqse_client != '' and xiqse_secret != ''

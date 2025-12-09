@@ -72,7 +72,7 @@ class ModuleDocFragment:
       options:
         site_path:
           description:
-            - Full address of the rental you want.
+            - Full site path/location in XIQ-SE (e.g. "Global/Region/Site").
           type: str
           required: true
     """
@@ -112,7 +112,7 @@ class ModuleDocFragment:
           default: gathered
           choices:
             - enabled
-            - diabled
+            - disabled
             - gathered
     """
     OPTIONS_TIMEOUT         = r"""

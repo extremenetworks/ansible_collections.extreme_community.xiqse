@@ -1,0 +1,19 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+*.pyc
+*.pyo
+*.swp
+
+# Ansible artifacts
+*.retry
+
+# Collection build artifacts
+*.tar.gz
+build/
+
+# IDE/editor
+.DS_Store
+.vscode/
+.idea/

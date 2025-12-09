@@ -12,3 +12,8 @@ tags:
   - networking
 dependencies: {}
 repository: https://github.com/extremenetworks/ansible_collections.extreme_community.xiqse
+build_ignore:
+  - .github/
+  - tests/
+  - .ansible-lint.yml
+  - .gitignore
