@@ -84,7 +84,7 @@ class XIQSE:
                   deviceId
                   ipAddress
                   message
-                  seriallNumber
+                  serialNumber
                   status
                 }
               }

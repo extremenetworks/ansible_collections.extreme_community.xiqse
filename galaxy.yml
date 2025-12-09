@@ -7,8 +7,14 @@ authors:
   - Thibault Chevalleraud <tchevalleraud@extremenetworks.com>
 description: >
   This collection provides Ansible modules and roles to manage ExtremeCloudIQ - Site Engine via GraphQL by Extreme Community.
-license: MIT
+license:
+  - MIT
 tags:
   - networking
 dependencies: {}
 repository: https://github.com/extremenetworks/ansible_collections.extreme_community.xiqse
+build_ignore:
+  - .github/
+  - tests/
+  - .ansible-lint.yml
+  - .gitignore

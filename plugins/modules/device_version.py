@@ -19,7 +19,7 @@ extends_documentation_fragment:
 EXAMPLES = r"""
 - name: Playbook to display the version of inventory device
   hosts: voss_devices
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Execute a GraphQL query to get the version
       extreme_community.xiqse.device_version:
@@ -37,7 +37,7 @@ EXAMPLES = r"""
 
 - name: Playbook to display the version of a specific device
   hosts: xiqse_api
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Execute a GraphQL query to get the version
       extreme_community.xiqse.device_version:

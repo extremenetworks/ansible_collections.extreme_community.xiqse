@@ -4,43 +4,90 @@ This collection provides Ansible modules and roles to manage ExtremeCloudIQ - Si
 
 ## Overview
 
-This collection, currently in version 1.0.0, includes :
+This collection provides modules and roles to interact with ExtremeCloudIQ – Site Engine (XIQ‑SE) over GraphQL.
 
-- **Module** :
-  - `device_version` : Get the version of device via XIQ-SE API
-  - `xiqse_mutation` : Executing a query type GraphQL mutation
-  - `xiqse_query`: Executing a query type GraphQL query
-  - `xiqse_site` : Allows site management within XIQ-SE
-  - `xiqse_version` : Get the version of XIQ-SE
+Included modules:
+- `xiqse_query`: Execute arbitrary GraphQL queries
+- `xiqse_mutation`: Execute GraphQL mutations
+- `xiqse_version`: Retrieve XIQ‑SE server version
+- `xiqse_site`: Manage sites in XIQ‑SE
+- `device_version`: Retrieve device firmware via XIQ‑SE
 
 ## Getting started
 
 ### Prerequisites
 
-- **Ansible:** Version 2.9 or later.
-- **Python:** The control node requires Python 3.x.
+- `Ansible` >= `2.15.0` (aligned with `meta/runtime.yml`)
+- Python 3.x on the control node
+- Python packages: `requests`, `urllib3`
 
 ### Installation
 
-Install the collection via Ansible Galaxy:
+Install from Galaxy:
 
 ```bash
-@TODO
+ansible-galaxy collection install extreme_community.xiqse
 ```
 
-You can also build it locally:
+Or build and install locally:
 
 ```bash
 git clone https://github.com/extremenetworks/ansible_collections.extreme_community.xiqse
+cd ansible_collections.extreme_community.xiqse
 ansible-galaxy collection build
-ansible-galaxy collection install extreme_community.xiqse-1.0.0.tar.gz
+ansible-galaxy collection install extreme_community-xiqse-1.0.0.tar.gz
 ```
 
 ## Usage Examples
 
-Find all our examples here with the environment configuration :
+Query XIQ‑SE server version:
 
-- @TODO
+```yaml
+- name: Get XIQ-SE version
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Query version
+      extreme_community.xiqse.xiqse_version:
+        provider:
+          host: "{{ xiqse_host }}"
+          client_id: "{{ xiqse_client }}"
+          client_secret: "{{ xiqse_secret }}"
+      register: result
+
+    - name: Show version
+      ansible.builtin.debug:
+        msg: "XIQ-SE version: {{ result.version }}"
+```
+
+Run a custom GraphQL query:
+
+```yaml
+- name: Run GraphQL query
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Execute query
+      extreme_community.xiqse.xiqse_query:
+        query: |
+          query {
+            administration {
+              serverInfo {
+                uptime
+                version
+              }
+            }
+          }
+        provider:
+          host: "{{ xiqse_host }}"
+          client_id: "{{ xiqse_client }}"
+          client_secret: "{{ xiqse_secret }}"
+      register: result
+
+    - name: Display result
+      ansible.builtin.debug:
+        var: result
+```
 
 ## Support
 

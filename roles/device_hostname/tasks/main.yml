@@ -6,9 +6,9 @@
       host: "{{ xiqse_host }}"
       client_id: "{{ xiqse_client }}"
       client_secret: "{{ xiqse_secret }}"
-      port: "{{ xiqse_port }}"
-      protocol: "{{ xiqse_protocol }}"
-      verify: "{{ xiqse_verify }}"
+      port: "{{ device_hostname_xiqse_port }}"
+      protocol: "{{ device_hostname_xiqse_protocol }}"
+      verify: "{{ device_hostname_xiqse_verify }}"
 
 - name: Allow time for XIQ-SE to finish synchronizing
   ansible.builtin.wait_for:
