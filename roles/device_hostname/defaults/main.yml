@@ -1,4 +1,4 @@
 ---
-xiqse_port: 8443
-xiqse_protocol: https
-xiqse_verify: True
+device_hostname_xiqse_port: 8443
+device_hostname_xiqse_protocol: https
+device_hostname_xiqse_verify: true

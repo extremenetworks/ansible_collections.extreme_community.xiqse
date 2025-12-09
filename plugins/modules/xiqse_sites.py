@@ -18,7 +18,7 @@ extends_documentation_fragment:
 EXAMPLES = r"""
 - name: Playbook for sync sites with XIQ-SE
   hosts: xiqse_api
-  gather_facts: no
+  gather_facts: false
   tasks:
     - name: Retrieve existing sites from XIQ-SE
       extreme_community.xiqse.xiqse_sites:
@@ -29,7 +29,7 @@ EXAMPLES = r"""
       register: result
 
     - name: Extract existing site paths
-      set_fact:
+      ansible.builtin.set_fact:
         existing_site_paths: "{{ result.sites | map(attribute='location') | list }}"
 """
 
