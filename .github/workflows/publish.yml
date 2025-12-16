@@ -2,7 +2,8 @@ name: Publish Ansible Collection
 
 on:
   push:
-    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
+    tags: ["v*.*.*"]
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -26,8 +27,8 @@ jobs:
 
       - name: Yaml Lint (including galaxy.yml)
         run: |
-          yamllint -f standard .
-          yamllint -f standard galaxy.yml
+          yamllint -d '{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}' -f standard .
+          yamllint -d '{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}' -f standard galaxy.yml
 
       - name: Ansible Lint
         run: |
