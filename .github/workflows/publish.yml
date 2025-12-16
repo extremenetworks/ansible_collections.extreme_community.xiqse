@@ -28,9 +28,8 @@ jobs:
 
       - name: Yaml Lint (including galaxy.yml)
         run: |
-          RULES='{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}'
-          yamllint -d "$RULES" -f standard .
-          yamllint -d "$RULES" -f standard galaxy.yml
+          yamllint -c .yamllint.yml -f standard .
+          yamllint -c .yamllint.yml -f standard galaxy.yml
 
       - name: Ansible Lint
         run: |
@@ -101,4 +100,5 @@ jobs:
           ANSIBLE_GALAXY_API_KEY: ${{ secrets.ANSIBLE_GALAXY_API_KEY }}
         run: |
           FILE=$(ls dist/*.tar.gz)
-          ansible-galaxy collection publish "$FILE" --api-key "$ANSIBLE_GALAXY_API_KEY"
+          ansible-galaxy collection publish "$FILE" \
+            --api-key "$ANSIBLE_GALAXY_API_KEY"
