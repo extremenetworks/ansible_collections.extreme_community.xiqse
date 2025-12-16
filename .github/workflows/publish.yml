@@ -56,10 +56,10 @@ jobs:
           fi
           echo "Version parity OK."
 
-      - name: Guard: block pre-release tags (-rc/-beta)
+      - name: "Guard: block pre-release tags (-rc/-beta)"
         run: |
           TAG="${GITHUB_REF##*/}"
-          if [[ "$TAG" =~ -rc|-beta ]]; then
+          if echo "$TAG" | grep -E '(-rc|-beta)' >/dev/null; then
             echo "Pre-release tag ($TAG) detected. Exiting validation."
             exit 1
           fi
