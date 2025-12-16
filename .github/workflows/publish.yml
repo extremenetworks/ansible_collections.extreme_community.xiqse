@@ -1,3 +1,4 @@
+---
 name: Publish Ansible Collection
 
 on:
@@ -27,8 +28,9 @@ jobs:
 
       - name: Yaml Lint (including galaxy.yml)
         run: |
-          yamllint -d '{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}' -f standard .
-          yamllint -d '{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}' -f standard galaxy.yml
+          RULES='{extends: default, rules: {line-length: {max: 140}, document-start: disable, truthy: disable}}'
+          yamllint -d "$RULES" -f standard .
+          yamllint -d "$RULES" -f standard galaxy.yml
 
       - name: Ansible Lint
         run: |
@@ -45,7 +47,8 @@ jobs:
             echo "galaxy.yml not found at repo root."
             exit 1
           fi
-          VERSION_IN_FILE="$(python -c \"import yaml,sys; print(yaml.safe_load(open('galaxy.yml')).get('version',''))\")"
+          PYCMD="import yaml,sys; print(yaml.safe_load(open('galaxy.yml')).get('version',''))"
+          VERSION_IN_FILE="$(python -c "$PYCMD")"
           echo "VERSION_IN_FILE=${VERSION_IN_FILE}"
           if [ -z "${VERSION_IN_FILE}" ]; then
             echo "No 'version' found in galaxy.yml."
