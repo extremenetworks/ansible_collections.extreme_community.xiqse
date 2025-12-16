@@ -44,13 +44,7 @@ jobs:
             echo "galaxy.yml not found at repo root."
             exit 1
           fi
-          VERSION_IN_FILE="$(python - <<'PY'
-import yaml
-with open('galaxy.yml') as f:
-    data = yaml.safe_load(f)
-print(data.get('version',''))
-PY
-)"
+          VERSION_IN_FILE="$(python -c \"import yaml,sys; print(yaml.safe_load(open('galaxy.yml')).get('version',''))\")"
           echo "VERSION_IN_FILE=${VERSION_IN_FILE}"
           if [ -z "${VERSION_IN_FILE}" ]; then
             echo "No 'version' found in galaxy.yml."
