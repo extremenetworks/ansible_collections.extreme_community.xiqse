@@ -6,7 +6,8 @@ authors:
   - Markus Nikulski <mnikulski@extremenetworks.com>
   - Thibault Chevalleraud <tchevalleraud@extremenetworks.com>
 description: >
-  This collection provides Ansible modules and roles to manage ExtremeCloudIQ - Site Engine via GraphQL by Extreme Community.
+  This collection provides Ansible modules and roles to manage
+  ExtremeCloudIQ - Site Engine via GraphQL by Extreme Community.
 license:
   - MIT
 tags:
