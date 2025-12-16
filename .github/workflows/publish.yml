@@ -35,6 +35,12 @@ jobs:
         run: |
           ansible-lint || (echo "ansible-lint failed" && exit 1)
 
+      - name: Validate GitHub Actions workflow syntax (actionlint)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash \
+            | bash -s v1.6.27
+          ./actionlint -color
+
       - name: Validate version parity (tag vs galaxy.yml)
         id: version_check
         run: |
